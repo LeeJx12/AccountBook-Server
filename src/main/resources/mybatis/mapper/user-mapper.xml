@@ -22,26 +22,26 @@
 				livexpdepositid,
 				(select depositname from deposit where depositid = livexpdepositid) as livexpdepositname
 		FROM	user
-		WHERE	loginid = #{loginid}
+		WHERE	loginid = #{loginId}
 	</select>
 	
 	<insert id="insertUser" parameterType="User">
 		INSERT INTO user (userid, loginid, username, passwd, targetamount, monthlife, daylife, startdate)
-		VALUES (#{userid}, #{loginid}, #{username}, #{passwd}, #{targetamount}, #{monthlife}, #{daylife}, now())
+		VALUES (#{userId}, #{loginId}, #{userName}, #{passwd}, #{targetAmount}, #{monthLife}, #{dayLife}, now())
 	</insert>
 	
 	<update id="updateUser" parameterType="User">
 		UPDATE	user
-		SET		targetamount =		#{targetamount},
-				monthlife =			#{monthlife},
-				daylife =			#{daylife},
-				livexpdepositid =	#{livexpdepositid}
-		WHERE	userid = #{userid}
+		SET		targetamount =		#{targetAmount},
+				monthlife =			#{monthLife},
+				daylife =			#{dayLife},
+				livexpdepositid =	#{livExpDepositId}
+		WHERE	userid = #{userId}
 	</update>
 	
 	<delete id="deleteUser" parameterType="User">
 		DELETE FROM user
-		WHERE	userid = #{userid}
+		WHERE	userid = #{userId}
 	</delete>
 
 </mapper>

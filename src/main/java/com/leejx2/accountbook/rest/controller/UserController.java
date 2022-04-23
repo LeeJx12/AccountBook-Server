@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,12 +35,12 @@ public class UserController {
 	}
 	
 	@PostMapping("/rest/usradd")
-	public void addUser(@ModelAttribute("params") User user) {
+	public void addUser(@RequestBody User user) {
 		userService.addUser(user);
 	}
 	
 	@PutMapping("/rest/cfgupd")
-	public void setUserConfig(@ModelAttribute("params") User user) {
+	public void setUserConfig(@RequestBody User user) {
 		userService.setUserConfig(user);
 	}
 	
