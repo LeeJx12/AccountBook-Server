@@ -9,5 +9,7 @@
 	</settings>
 	<mappers>
 		<mapper resource="user-mapper.xml" />
+		<mapper resource="deposit-mapper.xml" />
+		<mapper resource="deposit-history-mapper.xml" />
 	</mappers>
 </configuration>
