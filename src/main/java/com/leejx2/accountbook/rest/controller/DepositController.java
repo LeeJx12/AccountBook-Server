@@ -24,14 +24,14 @@ public class DepositController {
 	
 	@GetMapping("/rest/deposit/{userId}")
 	@ResponseBody
-	public List<Deposit> getUserDeposits(@PathVariable("userId") String userId) {
-		return depositService.getUserDeposits(userId);
+	public List<Deposit> getDeposits(@PathVariable("userId") String userId) {
+		return depositService.getDeposits(userId);
 	}
 	
 	@GetMapping("/rest/deposit/{userId}/{depositId}")
 	@ResponseBody
-	public Deposit getUserDeposit(@PathVariable("userId") String userId, @PathVariable("depositId") String depositId) {
-		return depositService.getUserDeposit(userId, depositId);
+	public Deposit getDeposit(@PathVariable("userId") String userId, @PathVariable("depositId") String depositId) {
+		return depositService.getDeposit(userId, depositId);
 	}
 	
 	@PostMapping("/rest/deposit")
@@ -45,7 +45,7 @@ public class DepositController {
 	}
 	
 	@DeleteMapping("/rest/deposit")
-	public void delUser(@ModelAttribute("params") Deposit deposit) {
+	public void delDeposit(@ModelAttribute("params") Deposit deposit) {
 		depositService.delDeposit(deposit);
 	}
 }

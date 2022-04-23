@@ -1,6 +1,7 @@
 package com.leejx2.accountbook.rest.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ public class DepositService {
 	 * 사용자의 예적금 계좌 전체 조회
 	 * @return
 	 */
-	public List<Deposit> getUserDeposits(String userId) {
+	public List<Deposit> getDeposits(String userId) {
 		return depositMapper.queryDeposits();
 	}
 	
@@ -29,7 +30,7 @@ public class DepositService {
 	 * @param depositId
 	 * @return
 	 */
-	public Deposit getUserDeposit(String userId, String depositId) {
+	public Deposit getDeposit(String userId, String depositId) {
 		return depositMapper.selectDeposit(userId, depositId);
 	}
 	
@@ -39,6 +40,7 @@ public class DepositService {
 	 */
 	@Transactional
 	public void addDeposit(Deposit deposit) {
+		deposit.setDepositId(UUID.randomUUID().toString());
 		depositMapper.insertDeposit(deposit);
 	}
 	

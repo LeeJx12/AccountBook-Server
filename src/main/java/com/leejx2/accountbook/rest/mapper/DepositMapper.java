@@ -37,20 +37,17 @@ public interface DepositMapper {
 	 * 계좌 정보 수정
 	 * @param deposit
 	 */
-	@Transactional
 	void updateDeposit(Deposit deposit);
 	
 	/**
 	 * 계좌 총액 업데이트
 	 * @param amount
 	 */
-	@Transactional
 	void updateDepositTotalAmount(int amount);
 	
 	/**
 	 * 계좌 삭제
 	 * @param deposit
 	 */
-	@Transactional
 	void deleteDeposit(Deposit deposit);
 }

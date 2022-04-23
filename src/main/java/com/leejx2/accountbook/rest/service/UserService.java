@@ -1,6 +1,7 @@
 package com.leejx2.accountbook.rest.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,7 @@ public class UserService {
 	 */
 	@Transactional
 	public void addUser(User user) {
+		user.setUserId(UUID.randomUUID().toString());
 		userMapper.insertUser(user);
 	}
 	
