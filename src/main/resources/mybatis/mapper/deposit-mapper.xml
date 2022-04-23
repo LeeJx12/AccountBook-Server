@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.leejx2.accountbook.rest.mapper.DepositMapper">
+
+	<select id="queryDeposits" resultType="Deposit">
+		SELECT	depositid,
+				userid,
+				depositname,
+				description,
+				amount,
+				dep.deposittypeid,
+				dt.deposittypename,
+				startdate,
+				enddate
+		FROM	deposit dep, deposit_type dt
+		WHERE	1=1
+		AND		dep.deposittypeid = dt.deposittypeid
+		AND		dep.userid = #{userId}
+	</select>
+	
+	<select id="selectDeposit" resultType="Deposit">
+		SELECT	depositid,
+				userid,
+				depositname,
+				description,
+				amount,
+				dep.deposittypeid,
+				dt.deposittypename,
+				startdate,
+				enddate
+		FROM	deposit dep, deposit_type dt
+		WHERE	1=1
+		AND		dep.deposittypeid = dt.deposittypeid
+		AND		dep.userid = #{userId}
+		AND		dep.depositid = #{depositId}
+	</select>
+	
+	<insert id="insertDeposit" parameterType="Deposit">
+		INSERT INTO deposit (depositid, userid, depositname, description, amount, deposittypeid, startdate, enddate, company, expamount)
+		VALUES (#{depositid}, #{userid}, #{depositname}, #{description}, #{amount}, #{deposittypeid}, #{startdate}, #{enddate}, #{company}, #{expamount})
+	</insert>
+	
+	<update id="updateDeposit" parameterType="Deposit">
+		UPDATE	deposit
+		SET		depositname =	#{depositName},
+				description = 	#{description},
+				amount =		#{amount},
+				deposittypeid =	#{depositTypeId},
+				startdate =		#{startDate},
+				enddate =		#{endDate},
+				company =		#{company},
+				expamount =		#{expAmount}
+		WHERE	userid = 		#{userId}
+		AND		depositid = 	#{depositId}
+	</update>
+	
+	<update id="updateDepositTotalAmount" parameterType="Integer">
+		UPDATE	deposit
+		SET		amount =		amount + #{amount}
+		WHERE	userid = 		#{userId}
+		AND		depositid = 	#{depositId}
+	</update>
+	
+	<delete id="deleteDeposit" parameterType="Deposit">
+		DELETE FROM deposit
+		WHERE	userid = #{userId}
+		AND		depositid = 	#{depositId}
+	</delete>
+
+</mapper>
