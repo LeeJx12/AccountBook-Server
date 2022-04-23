@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.leejx2.accountbook.rest.mapper.UserMapper">
+
+	<select id="queryUsers" resultType="User">
+		SELECT	userid, loginid, username, startdate
+		FROM	user
+	</select>
+	
+	<select id="selectUser" resultType="User">
+		SELECT	userid, 
+				loginid, 
+				username, 
+				passwd, 
+				targetamount, 
+				monthlife, 
+				daylife, 
+				startdate, 
+				livexpdepositid,
+				(select depositname from deposit where depositid = livexpdepositid) as livexpdepositname
+		FROM	user
+		WHERE	loginid = #{loginid}
+	</select>
+	
+	<insert id="insertUser" parameterType="User">
+		INSERT INTO user (userid, loginid, username, passwd, targetamount, monthlife, daylife, startdate)
+		VALUES (#{userid}, #{loginid}, #{username}, #{passwd}, #{targetamount}, #{monthlife}, #{daylife}, now())
+	</insert>
+	
+	<update id="updateUser" parameterType="User">
+		UPDATE	user
+		SET		targetamount =		#{targetamount},
+				monthlife =			#{monthlife},
+				daylife =			#{daylife},
+				livexpdepositid =	#{livexpdepositid}
+		WHERE	userid = #{userid}
+	</update>
+	
+	<delete id="deleteUser" parameterType="User">
+		DELETE FROM user
+		WHERE	userid = #{userid}
+	</delete>
+
+</mapper>
