@@ -34,17 +34,17 @@ public class UserController {
 		return userService.getUser(loginId);
 	}
 	
-	@PostMapping("/rest/usradd")
+	@PostMapping("/rest/user")
 	public void addUser(@RequestBody User user) {
 		userService.addUser(user);
 	}
 	
-	@PutMapping("/rest/cfgupd")
+	@PutMapping("/rest/user")
 	public void setUserConfig(@RequestBody User user) {
 		userService.setUserConfig(user);
 	}
 	
-	@DeleteMapping("/rest/usrdel")
+	@DeleteMapping("/rest/user")
 	public void delUser(@ModelAttribute("params") User user) {
 		userService.delUser(user);
 	}
