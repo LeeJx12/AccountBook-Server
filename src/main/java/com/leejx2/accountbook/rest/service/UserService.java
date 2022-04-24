@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.leejx2.accountbook.common.util.Encryptor;
 import com.leejx2.accountbook.rest.mapper.UserMapper;
 import com.leejx2.accountbook.rest.model.User;
 
@@ -40,6 +41,7 @@ public class UserService {
 	@Transactional
 	public void addUser(User user) {
 		user.setUserId(UUID.randomUUID().toString());
+		user.setPasswd(Encryptor.encrypt(user.getPasswd()));
 		userMapper.insertUser(user);
 	}
 	
