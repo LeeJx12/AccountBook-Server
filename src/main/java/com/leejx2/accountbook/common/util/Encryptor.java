@@ -2,6 +2,7 @@ package com.leejx2.accountbook.common.util;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 
 public class Encryptor {
 	
@@ -27,5 +28,13 @@ public class Encryptor {
 	        MD5 = null;
 	    }
 	    return MD5;
+	}
+	
+	/**
+	 * Base64 decode
+	 */
+	public static String base64Decode(String pwd) {
+		byte[] decoded = Base64.getDecoder().decode(pwd);
+		return new String(decoded);
 	}
 }
