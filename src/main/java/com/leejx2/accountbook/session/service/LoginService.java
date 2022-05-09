@@ -22,6 +22,7 @@ public class LoginService {
 		String encPasswd = "";
 		try {
 			encPasswd = Encryptor.base64Decode(passwd);
+			encPasswd = Encryptor.aesDecrypt(encPasswd);
 			encPasswd = Encryptor.encrypt(encPasswd);
 		} catch(Exception e) {
 			//TODO: 로깅처리, exception 처리 추가할것!
