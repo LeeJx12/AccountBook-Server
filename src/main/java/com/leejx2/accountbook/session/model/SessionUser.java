@@ -17,6 +17,20 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class SessionUser extends User {
+	public SessionUser (User user) {
+		super(
+			user.getUserId(),
+			user.getLoginId(),
+			user.getUserName(),
+			user.getPasswd(),
+			user.getTargetAmount(),
+			user.getMonthLife(),
+			user.getDayLife(),
+			user.getStartDate(),
+			user.getLivExpDepositId(),
+			user.getLivExpDepositName()
+		);
+	}
 	private String JSEESIONID;
 	private Timestamp creationDate;
 	private String sessionStatus = Constants.SESSION_STATUS_INVALID;

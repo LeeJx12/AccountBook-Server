@@ -1,11 +1,15 @@
 package com.leejx2.accountbook.session.controller;
 
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.tomcat.util.json.JSONParser;
+import org.apache.tomcat.util.json.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +20,7 @@ import com.leejx2.accountbook.rest.service.UserService;
 import com.leejx2.accountbook.session.model.SessionUser;
 import com.leejx2.accountbook.session.service.LoginService;
 
+@CrossOrigin(origins="*", allowedHeaders="*")
 @RestController
 public class SessionController {
 
@@ -26,7 +31,7 @@ public class SessionController {
 	private LoginService loginService;
 	
 	@PostMapping("/login")
-	public SessionUser login(HttpSession session, @RequestBody Map<String, String> params) {
+	public SessionUser login(HttpSession session, @RequestBody String paramStr) {
 		// 초기화
 		if (!session.isNew()) {
 			session.invalidate();
@@ -34,8 +39,16 @@ public class SessionController {
 		
 		SessionUser sessionUser = new SessionUser();
 		
-		String loginId = params.getOrDefault("loginId", "");
-		String passwd = params.getOrDefault("passwd", "");
+		JSONParser parser = new JSONParser(paramStr);
+		Map<String, Object> params = new HashMap<String, Object>();
+		try {
+			params = parser.object();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		String loginId = (String) params.getOrDefault("loginId", "");
+		String passwd = (String) params.getOrDefault("passwd", "");
 		
 		// 사용자 체크
 		User user = userService.getUser(loginId);

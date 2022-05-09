@@ -14,9 +14,11 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
+import org.springframework.util.Base64Utils;
+
 public class Encryptor {
 	public static String alg = "AES/CBC/PKCS5Padding";
-    private final static String key = "a12eadf09j2nfad";
+    private final static String key = "a12eadf09j2nfad3mn4i8qdw0zcvk24t";
     private final static String iv = key.substring(0, 16); // 16byte
 	
 	/**
@@ -56,7 +58,7 @@ public class Encryptor {
 			cipher = Cipher.getInstance(alg);
 			
 			SecretKeySpec keySpec = new SecretKeySpec(key.getBytes(), "AES");
-	        IvParameterSpec ivParamSpec = new IvParameterSpec(iv.getBytes());
+	        IvParameterSpec ivParamSpec = new IvParameterSpec(iv.getBytes("UTF-8"));
 	        cipher.init(Cipher.ENCRYPT_MODE, keySpec, ivParamSpec);
 	        
 	        encrypted = cipher.doFinal(pwd.getBytes("UTF-8"));
@@ -77,7 +79,7 @@ public class Encryptor {
 	public static String aesDecrypt(String cipherText) throws Exception {
         Cipher cipher = Cipher.getInstance(alg);
         SecretKeySpec keySpec = new SecretKeySpec(key.getBytes(), "AES");
-        IvParameterSpec ivParamSpec = new IvParameterSpec(iv.getBytes());
+        IvParameterSpec ivParamSpec = new IvParameterSpec(iv.getBytes("UTF-8"));
         cipher.init(Cipher.DECRYPT_MODE, keySpec, ivParamSpec);
 
         byte[] decodedBytes = Base64.getDecoder().decode(cipherText);
@@ -89,7 +91,6 @@ public class Encryptor {
 	 * Base64 decode
 	 */
 	public static String base64Decode(String pwd) {
-		byte[] decoded = Base64.getDecoder().decode(pwd);
-		return new String(decoded);
+		return new String(Base64.getUrlDecoder().decode(pwd));
 	}
 }

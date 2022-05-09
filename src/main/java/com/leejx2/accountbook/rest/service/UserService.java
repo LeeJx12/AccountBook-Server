@@ -41,7 +41,7 @@ public class UserService {
 	@Transactional
 	public void addUser(User user) {
 		user.setUserId(UUID.randomUUID().toString());
-		user.setPasswd(Encryptor.encrypt(Encryptor.base64Decode(user.getPasswd())));
+		user.setPasswd(Encryptor.encrypt(user.getPasswd()));
 		userMapper.insertUser(user);
 	}
 	

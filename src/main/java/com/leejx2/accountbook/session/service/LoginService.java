@@ -21,8 +21,7 @@ public class LoginService {
 		// password 처리
 		String encPasswd = "";
 		try {
-			encPasswd = Encryptor.base64Decode(passwd);
-			encPasswd = Encryptor.aesDecrypt(encPasswd);
+			encPasswd = Encryptor.aesDecrypt(passwd);
 			encPasswd = Encryptor.encrypt(encPasswd);
 		} catch(Exception e) {
 			//TODO: 로깅처리, exception 처리 추가할것!
@@ -31,7 +30,7 @@ public class LoginService {
 		if (!user.getPasswd().equals(encPasswd)) {
 			sessionUser.setLoginFailMessage(Constants.LOGIN_FAIL_AUTH_FAIL);
 		} else {
-			sessionUser = (SessionUser) user;
+			sessionUser = new SessionUser(user);
 			sessionUser.setLoginResult(Constants.LOGIN_RESULT_SUCCESS);
 			sessionUser.setLoginFailMessage("");
 		}
