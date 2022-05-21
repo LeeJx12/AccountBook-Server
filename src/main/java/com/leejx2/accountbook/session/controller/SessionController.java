@@ -64,6 +64,7 @@ public class SessionController {
 			sessionUser.setJSEESIONID(session.getId());
 			sessionUser.setSessionStatus(Constants.SESSION_STATUS_VALID);
 			sessionUser.setCreationDate(new Timestamp(session.getCreationTime()));
+			sessionUser.setPasswd("");
 			
 			session.setAttribute(Constants.SESSION_KEY_USER, sessionUser);
 			session.setAttribute(Constants.SESSION_KEY_LOGINID, sessionUser.getLoginId());
