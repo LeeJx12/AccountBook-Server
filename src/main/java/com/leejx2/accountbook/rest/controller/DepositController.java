@@ -3,6 +3,7 @@ package com.leejx2.accountbook.rest.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.leejx2.accountbook.rest.model.Deposit;
 import com.leejx2.accountbook.rest.service.DepositService;
 
+@CrossOrigin(origins="*", allowedHeaders="*")
 @RestController
 public class DepositController {
 
